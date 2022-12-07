@@ -5,8 +5,8 @@ from inventory_app import InventoryApp
 
 def main():
     # start app
-    home_inventory_app_2 = InventoryApp()
-    home_inventory_app_2.run_program()
+    appli = InventoryApp()
+    appli.run_program()
 
 
 

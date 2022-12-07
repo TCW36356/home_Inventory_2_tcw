@@ -1,0 +1,5 @@
+Sample Document
+
+This is a placeholder document. It will sit here, for the purpose of existing if someone looks in this folder.
+
+This folder will also likely hold saved inventory files.
