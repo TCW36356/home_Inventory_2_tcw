@@ -22,6 +22,6 @@ CREATE TABLE IF NOT EXISTS `inventories` (
   `description` varchar(200) DEFAULT NULL,
   `date` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 COMMIT;
