@@ -9,7 +9,6 @@ def main():
     appli.run_program()
 
 
-
-    # Call main() if this is the main execution module
-    if __name__ == '__main__':
-        main()
+# Call main() if this is the main execution module
+if __name__ == '__main__':
+    main()

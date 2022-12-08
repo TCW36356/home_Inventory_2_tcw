@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `inventory_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `fk_inventory_id` (`inventory_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for table `items`

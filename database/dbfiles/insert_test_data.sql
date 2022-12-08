@@ -10,13 +10,13 @@ SET time_zone = "+00:00";
 
 USE `home_inventory`;
 
-INSERT INTO `items` (item, count, inventory_id) values('LEGO Set', 5, 1);
-INSERT INTO `items` (item, count, inventory_id) values('MacBook Pro', 1, 1);
-INSERT INTO `items` (item, count, inventory_id) values('Table', 1, 1);
-INSERT INTO `items` (item, count, inventory_id) values('Car', 1, 1);
-INSERT INTO `items` (item, count, inventory_id) values('Chair', 1, 1);
-INSERT INTO `items` (item, count, inventory_id) values('Bookcase', 6, 1);
-INSERT INTO `items` (item, count, inventory_id) values('Couch', 1, 1);
+INSERT INTO `items` (item, count) values('LEGO Set', 5);
+INSERT INTO `items` (item, count) values('MacBook Pro', 1);
+INSERT INTO `items` (item, count) values('Table', 1);
+INSERT INTO `items` (item, count) values('Car', 1);
+INSERT INTO `items` (item, count) values('Chair', 1);
+INSERT INTO `items` (item, count) values('Bookcase', 6);
+INSERT INTO `items` (item, count) values('Couch', 1);
 
 
 
