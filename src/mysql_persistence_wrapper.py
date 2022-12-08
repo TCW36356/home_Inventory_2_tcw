@@ -13,6 +13,7 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 		self.INSERT = 'INSERT INTO items (inventory_id, item, count) VALUES(%s, %s, %s)'
 		self.SELECT_ALL_ITEMS_FOR_INVENTORY_ID = 'SELECT id, inventory_id, item, count FROM items WHERE inventory_id = %s'
 		self.SEARCH_ITEMS_FOR_NAME = "SELECT id, inventory_id, item, count FROM items WHERE item = %s"
+		self.CREATE_INVENTORY = "INSERT INTO inventories (name, description, date) VALUES(%s, %s, %s)"
 
 		# Database Configuration Constants
 		self.DB_CONFIG = {}
@@ -51,7 +52,14 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 
 	def create_inventory(self, name: str, description: str, date: str): #ask user in inventory_app, pass to business_logic
 		"""Insert new row into inventories table."""
-		pass
+		cursor = None
+		try:
+			cursor = self._db_connection.cursor()
+			cursor.execute(self.CREATE_INVENTORY, ([name], [description], [date])) 
+			results = cursor.fetchall()
+		except Exception as e:
+			print(f'Exception in persistance wrapper: {e}')
+		return results
 
 	def find_item(self, item: str):
 		cursor = None
