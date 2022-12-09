@@ -55,7 +55,7 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 		cursor = None
 		try:
 			cursor = self._db_connection.cursor()
-			cursor.execute(self.CREATE_INVENTORY, ([name], [description], [date])) 
+			cursor.execute(self.CREATE_INVENTORY, (name, description, date)) 
 			results = cursor.fetchall()
 		except Exception as e:
 			print(f'Exception in persistance wrapper: {e}')
