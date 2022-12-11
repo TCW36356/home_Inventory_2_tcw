@@ -9,7 +9,7 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 	def __init__(self):
 		"""Initializes """
 		# Constants
-		self.SELECT_ALL_INVENTORIES = 'SELECT id, name, description FROM inventories'
+		self.SELECT_ALL_INVENTORIES = 'SELECT id, name, description, date FROM inventories'
 		self.INSERT = 'INSERT INTO items (inventory_id, item, count) VALUES(%s, %s, %s)'
 		self.SELECT_ALL_ITEMS_FOR_INVENTORY_ID = 'SELECT id, inventory_id, item, count FROM items WHERE inventory_id = %s'
 		self.SEARCH_ITEMS_FOR_NAME = "SELECT id, inventory_id, item, count FROM items WHERE item = %s"

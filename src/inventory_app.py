@@ -41,8 +41,8 @@ class InventoryApp():
 		print('\t\t3. Select Inventory')
 		print('\t\t4. List Inventory Items')
 		print('\t\t5. Add Items (Not Implemented)')
-		print('\t\t6. Search Current Inventory')
-		print('\t\t7. Save Inventory to File')
+		print('\t\t6. Search Current Inventory (Not Implemented)')
+		print('\t\t7. Save Inventory to File (Not Implemented)')
 		print('\t\t8. Exit')
 		print()
 

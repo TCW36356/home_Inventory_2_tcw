@@ -59,5 +59,10 @@ class BusinessLogic():
 			print(f'Exception in business logic: {e}')
 		return query_results
 
+	
+	def add_item(self, inventory_id: int, item: str, count: int):
+		"""Adds item to current inventory."""
+		pass
+
 
 	
