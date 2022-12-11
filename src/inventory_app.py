@@ -155,15 +155,19 @@ class InventoryApp():
 		count = None
 		try:
 			keep_going = True
-			while keep_going:
-				item = str(input('What would you like to add? Please enter the name of the item: '))
-				count = int(input('How many would you like to add? Please enter a number: '))
-				self.business_logic.add_item(inventory_id, item, count)
-				response = input('\n\nItem added! Would you like to add another? (y/n) ')
-				if response.capitalize() == 'Y':
-					self.clear_screen()
-				else:	
-					keep_going = False
+			if inventory_id == 0:
+				input('Please select an inventory first. Press any key to continue: ')
+				keep_going = False
+			else:
+				while keep_going:
+					item = str(input('What would you like to add? Please enter the name of the item: '))
+					count = int(input('How many would you like to add? Please enter a number: '))
+					self.business_logic.add_item(inventory_id, item, count)
+					response = input('\n\nItem added! Would you like to add another? (y/n) ')
+					if response.capitalize() == 'Y':
+						self.clear_screen()
+					else:	
+						keep_going = False
 		except Exception as e:
 			print(f'Exception in add_items() method: {e}')
 
@@ -174,22 +178,27 @@ class InventoryApp():
 			print('find_items() method called...')
 		inventory_id = self.active_inventory_id
 		try:
-			where_is = input('What are you looking for: ')
-			result = self.business_logic.find_item(where_is)
-			if result == []:
-				print(where_is + ' is not in the selected inventory.')
-				input('\n\nPress any key to continue...')
-			else:
-				results = result[0]
-				if results[1] == inventory_id:
-					if results[3] == 1:
-						print('There is one ' + results[2] + ' in the inventory.')
-						input('\n\nPress any key to continue...')
-					else:
-						print('There are ' + str(results[3]) + ' ' + results[2] + ' in the inventory.')
-						input('\n\nPress any key to continue...')
+			keep_going = True
+			if inventory_id == 0:
+				input('Please select an inventory first. Press any key to continue: ')
+				keep_going = False
+			while keep_going == True:
+				where_is = input('What are you looking for: ')
+				result = self.business_logic.find_item(where_is)
+				if result == []:
+					print(where_is + ' is not in the selected inventory.')
+					input('\n\nPress any key to continue...')
 				else:
-					print('That\'s not in there. Sorry!')
+					results = result[0]
+					if results[1] == inventory_id:
+						if results[3] == 1:
+							print('There is one ' + results[2] + ' in the inventory.')
+							input('\n\nPress any key to continue...')
+						else:
+							print('There are ' + str(results[3]) + ' ' + results[2] + ' in the inventory.')
+							input('\n\nPress any key to continue...')
+					else:
+						print('That\'s not in there. Sorry!')
 			
 
 		except Exception as e:
