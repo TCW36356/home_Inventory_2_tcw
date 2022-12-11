@@ -159,8 +159,10 @@ class InventoryApp():
 				item = str(input('What would you like to add? Please enter the name of the item: '))
 				count = int(input('How many would you like to add? Please enter a number: '))
 				self.business_logic.add_item(inventory_id, item, count)
-				response = input('item added! Press any key to continue: ')
-				if response != None:
+				response = input('\n\nItem added! Would you like to add another? (y/n) ')
+				if response.capitalize() == 'Y':
+					self.clear_screen()
+				else:	
 					keep_going = False
 		except Exception as e:
 			print(f'Exception in add_items() method: {e}')
