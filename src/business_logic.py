@@ -62,7 +62,12 @@ class BusinessLogic():
 	
 	def add_item(self, inventory_id: int, item: str, count: int):
 		"""Adds item to current inventory."""
-		pass
+		id = 0
+		try:
+			id = self._persistence_wrapper.create_item(inventory_id, item, count)
+		except Exception as e:
+			print(f'Exception in business logic: {e}')
+		return id
 
 
 	

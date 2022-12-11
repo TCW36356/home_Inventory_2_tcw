@@ -3,6 +3,7 @@
 from business_logic import BusinessLogic
 from prettytable import PrettyTable
 from datetime import date
+import time
 import os
 
 class InventoryApp():
@@ -40,7 +41,7 @@ class InventoryApp():
 		print('\t\t2. List Inventories')
 		print('\t\t3. Select Inventory')
 		print('\t\t4. List Inventory Items')
-		print('\t\t5. Add Items (Not Implemented)')
+		print('\t\t5. Add Items')
 		print('\t\t6. Search Current Inventory (Not Implemented)')
 		print('\t\t7. Save Inventory to File (Not Implemented)')
 		print('\t\t8. Exit')
@@ -82,7 +83,8 @@ class InventoryApp():
 		
 		name = None
 		description = None
-		tdate = str(date.today())
+		curr_time = time.strftime("%H:%M:%S", time.localtime())
+		tdate = (str(date.today()) + ' ' + curr_time)
 		try:
 			keep_going = True
 			while keep_going:
@@ -144,9 +146,24 @@ class InventoryApp():
 
 	def add_items(self):
 		"""Add items to inventory."""
+		self.clear_screen()
 		if __debug__:
 			print('add_items() method called...')
-		input('\n\vThis method is not yet implemented. Press any key to continue: ')
+		
+		inventory_id = self.active_inventory_id
+		item = None
+		count = None
+		try:
+			keep_going = True
+			while keep_going:
+				item = str(input('What would you like to add? Please enter the name of the item: '))
+				count = int(input('How many would you like to add? Please enter a number: '))
+				self.business_logic.add_item(inventory_id, item, count)
+				response = input('item added! Press any key to continue: ')
+				if response != None:
+					keep_going = False
+		except Exception as e:
+			print(f'Exception in add_items() method: {e}')
 
 	def find_item(self):
 		"""Search current inventory for an item."""
@@ -169,9 +186,9 @@ class InventoryApp():
 			
 					
 	def print_inventory_list(self, inv_list):
-		t = PrettyTable(['ID', 'Name', 'Description'])
+		t = PrettyTable(['ID', 'Name', 'Description', 'Date'])
 		for row in inv_list:
-			t.add_row([row[0], row[1], row[2]])
+			t.add_row([row[0], row[1], row[2], row[3]])
 		print(t)
 
 	def print_items_list(self, items_list):
