@@ -10,10 +10,10 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 		"""Initializes """
 		# Constants
 		self.SELECT_ALL_INVENTORIES = 'SELECT id, name, description, date FROM inventories'
-		self.INSERT = 'INSERT INTO items (inventory_id, item, count) VALUES(%s, %s, %s)'
+		self.INSERT = 'INSERT INTO `items` (inventory_id, item, count) VALUES(%s, %s, %s)'
 		self.SELECT_ALL_ITEMS_FOR_INVENTORY_ID = 'SELECT id, inventory_id, item, count FROM items WHERE inventory_id = %s'
 		self.SEARCH_ITEMS_FOR_NAME = "SELECT id, inventory_id, item, count FROM items WHERE item = %s"
-		self.CREATE_INVENTORY = "INSERT INTO inventories (name, description, date) VALUES(%s, %s, %s)"
+		self.CREATE_INVENTORY = "INSERT INTO `inventories` (name, description, date) VALUES(%s, %s, %s)"
 
 		# Database Configuration Constants
 		self.DB_CONFIG = {}
@@ -55,7 +55,8 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 		cursor = None
 		try:
 			cursor = self._db_connection.cursor()
-			cursor.execute(self.CREATE_INVENTORY, (name, description, date)) 
+			cursor.execute(self.CREATE_INVENTORY, (name, description, date))
+			self._db_connection.commit() 
 			results = cursor.fetchall()
 		except Exception as e:
 			print(f'Exception in persistance wrapper: {e}')
@@ -77,6 +78,7 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 		try:
 			cursor = self._db_connection.cursor()
 			cursor.execute(self.INSERT, (inventory_id, item, count))
+			self._db_connection.commit()
 			results = cursor.fetchall()
 		except Exception as e:
 			print(f'Exception in persistance wrapper: {e}')
