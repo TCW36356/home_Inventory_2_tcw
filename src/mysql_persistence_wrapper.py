@@ -73,7 +73,14 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 
 	def create_item(self, inventory_id: int, item: str, count: int):
 		"""Insert new row into items table for given inventory id"""
-		pass
+		cursor = None
+		try:
+			cursor = self._db_connection.cursor()
+			cursor.execute(self.INSERT, (inventory_id, item, count))
+			results = cursor.fetchall()
+		except Exception as e:
+			print(f'Exception in persistance wrapper: {e}')
+		return results
 		
 		
 	def _initialize_database_connection(self, config):
