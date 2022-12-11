@@ -194,10 +194,14 @@ class InventoryApp():
 					if results[1] == inventory_id:
 						if results[3] == 1:
 							print('There is one ' + results[2] + ' in the inventory.')
-							input('\n\nPress any key to continue...')
+							response = input('\n\nPress any key to continue...')
+							if response != None:
+								keep_going = False
 						else:
 							print('There are ' + str(results[3]) + ' ' + results[2] + ' in the inventory.')
 							input('\n\nPress any key to continue...')
+							if response != None:
+								keep_going = False
 					else:
 						print('That\'s not in there. Sorry!')
 			
