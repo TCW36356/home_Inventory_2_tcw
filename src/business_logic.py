@@ -69,5 +69,15 @@ class BusinessLogic():
 			print(f'Exception in business logic: {e}')
 		return id
 
+	
+	def find_item(self, item: str):
+		"""Searches current inventory for item."""
+		query_results = None
+		try:
+			query_results = self._persistence_wrapper.find_item(item)
+		except Exception as e:
+			print(f'Exception in business logic: {e}')
+		return query_results
+
 
 	

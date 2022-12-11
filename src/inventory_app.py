@@ -42,7 +42,7 @@ class InventoryApp():
 		print('\t\t3. Select Inventory')
 		print('\t\t4. List Inventory Items')
 		print('\t\t5. Add Items')
-		print('\t\t6. Search Current Inventory (Not Implemented)')
+		print('\t\t6. Search Current Inventory')
 		print('\t\t7. Save Inventory to File (Not Implemented)')
 		print('\t\t8. Exit')
 		print()
@@ -125,7 +125,7 @@ class InventoryApp():
 			inventory_list = self._get_inventories()
 			keep_going = True
 			while keep_going:
-				self.print_inventory_list(inv_list=inventory_list)
+				self.print_inventory_list(inventory_list)
 				self.active_inventory_id = int(input('\n\nSelect inventory id from list: '))
 				response = input(f'You entered {str(self.active_inventory_id)}. Is this correct? (y/n) ')
 				if response.capitalize() == 'Y':
@@ -167,9 +167,32 @@ class InventoryApp():
 
 	def find_item(self):
 		"""Search current inventory for an item."""
+		self.clear_screen()
 		if __debug__:
 			print('find_items() method called...')
-		input('\n\vThis method is not yet implemented. Press any key to continue: ')
+		inventory_id = self.active_inventory_id
+		try:
+			where_is = input('What are you looking for: ')
+			result = self.business_logic.find_item(where_is)
+			if result == []:
+				print(where_is + ' is not in the selected inventory.')
+				input('\n\nPress any key to continue...')
+			else:
+				results = result[0]
+				if results[1] == inventory_id:
+					if results[3] == 1:
+						print('There is one ' + results[2] + ' in the inventory.')
+						input('\n\nPress any key to continue...')
+					else:
+						print('There are ' + str(results[3]) + ' ' + results[2] + ' in the inventory.')
+						input('\n\nPress any key to continue...')
+				else:
+					print('That\'s not in there. Sorry!')
+			
+
+		except Exception as e:
+			print(f'Exception in find_item() method: {e}')
+
 
 	def save_to_file(self):
 		"""Save current inventory to file in json format."""
@@ -185,9 +208,9 @@ class InventoryApp():
 			self.process_menu_choice()
 			
 					
-	def print_inventory_list(self, inv_list):
+	def print_inventory_list(self, inventory_list):
 		t = PrettyTable(['ID', 'Name', 'Description', 'Date'])
-		for row in inv_list:
+		for row in inventory_list:
 			t.add_row([row[0], row[1], row[2], row[3]])
 		print(t)
 
