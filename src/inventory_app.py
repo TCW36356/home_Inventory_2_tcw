@@ -3,6 +3,7 @@
 from business_logic import BusinessLogic
 from prettytable import PrettyTable
 from datetime import date
+import json
 import time
 import os
 
@@ -43,7 +44,7 @@ class InventoryApp():
 		print('\t\t4. List Inventory Items')
 		print('\t\t5. Add Items')
 		print('\t\t6. Search Current Inventory')
-		print('\t\t7. Save Inventory to File (Not Implemented)')
+		print('\t\t7. Save Inventory to File')
 		print('\t\t8. Exit')
 		print()
 
@@ -206,10 +207,14 @@ class InventoryApp():
 
 
 	def save_to_file(self):
-		"""Save current inventory to file in json format."""
+		"""Save all inventories and items to file in json format."""
 		if __debug__:
 			print('save_to_file() method called...')
-		input('\n\vThis method is not yet implemented. Press any key to continue: ')
+		if self.active_inventory_id != None:
+			file_path = self._retrieve_file_path()
+			with open(file_path, 'w', encoding='UTF-8') as f:
+				f.write(self.business_logic.get_all_inventories_with_format('json'))
+				f.write(self.business_logic.get_all_items_with_format('json'))
 
 	def run_program(self):
 		"""Start the applications."""
@@ -231,6 +236,10 @@ class InventoryApp():
 			t.add_row([row[0], row[1], row[2], row[3]])
 		print(t)
 
+	def _retrieve_file_path(self):
+		"""Method to create a file path in which to save the inventory."""
+		save_where = input("Please enter the path and filename: ")
+		return save_where
 
 
 		

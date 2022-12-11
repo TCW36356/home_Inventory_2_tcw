@@ -10,6 +10,7 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 		"""Initializes """
 		# Constants
 		self.SELECT_ALL_INVENTORIES = 'SELECT id, name, description, date FROM inventories'
+		self.SELECT_ALL_ITEMS = 'SELECT id, inventory_id, item, count FROM items'
 		self.INSERT = 'INSERT INTO `items` (inventory_id, item, count) VALUES(%s, %s, %s)'
 		self.SELECT_ALL_ITEMS_FOR_INVENTORY_ID = 'SELECT id, inventory_id, item, count FROM items WHERE inventory_id = %s'
 		self.SEARCH_ITEMS_FOR_NAME = "SELECT id, inventory_id, item, count FROM items WHERE item = %s"
@@ -32,6 +33,17 @@ class MySQLPersistenceWrapper(PersistenceWrapperInterface): #this extends the Pe
 		try:
 			cursor = self._db_connection.cursor()
 			cursor.execute(self.SELECT_ALL_INVENTORIES) #cursor is how you execute queries
+			results = cursor.fetchall()
+		except Exception as e:
+			print(f'Exception in persistance wrapper: {e}')
+		return results
+
+	def get_all_items(self):
+		"""Returns a list of all items."""
+		cursor = None
+		try:
+			cursor = self._db_connection.cursor()
+			cursor.execute(self.SELECT_ALL_ITEMS)
 			results = cursor.fetchall()
 		except Exception as e:
 			print(f'Exception in persistance wrapper: {e}')

@@ -39,6 +39,24 @@ class BusinessLogic():
 			print(f'Exception in business logic: {e}')
 		return return_results
 
+	def get_all_items_with_format(self, format: str):
+		"""Returns all items in requested format. 
+		   Only supported format is JSON. Add others as required.
+		"""
+		query_results = None
+		try:
+			query_results = self._persistence_wrapper.get_all_items()
+		except Exception as e:
+			print(f'Exception in business logic: {e}')
+		
+		return_results = None
+		try:
+			match format:
+				case 'json': return_results = json.dumps(query_results)
+		except Exception as e:
+			print(f'Exception in business logic: {e}')
+		return return_results
+
 
 	def create_new_inventory(self, name: str, description: str, date: str):
 		"""Adds a new inventory to the datastore."""
