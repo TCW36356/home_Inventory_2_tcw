@@ -215,10 +215,13 @@ class InventoryApp():
 		if __debug__:
 			print('save_to_file() method called...')
 		if self.active_inventory_id != None:
-			file_path = self._retrieve_file_path()
-			with open(file_path, 'w', encoding='UTF-8') as f:
-				f.write(self.business_logic.get_all_inventories_with_format('json'))
-				f.write(self.business_logic.get_all_items_with_format('json'))
+			try:
+				file_path = self._retrieve_file_path()
+				with open(file_path, 'w', encoding='UTF-8') as f:
+					f.write(self.business_logic.get_all_inventories_with_format('json'))
+					f.write(self.business_logic.get_all_items_with_format('json'))
+			except Exception as e:
+				print(f'Exception in save_to_file() method: {e}')
 
 	def run_program(self):
 		"""Start the applications."""
