@@ -189,6 +189,7 @@ class InventoryApp():
 				if result == []:
 					print(where_is + ' is not in the selected inventory.')
 					input('\n\nPress any key to continue...')
+					keep_going = False
 				else:
 					results = result[0]
 					if results[1] == inventory_id:
